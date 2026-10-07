@@ -1,11 +1,9 @@
 package com.example.jobtracker;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +25,17 @@ public class JobApplicationController {
     public Map<String,Integer> stats(){
         return service.countByStatus();
     }
+
+    @GetMapping("/api/applications/{id}")
+    public JobApplication findById(@PathVariable int id){
+        return service.findById(id);
+    }
+
+    @GetMapping("/api/applications/status/{status}")
+    public List<JobApplication> findByStatus(@PathVariable String status){
+        return service.findByStatus(status);
+    }
+
 
 
 }

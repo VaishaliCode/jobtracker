@@ -23,7 +23,24 @@ public class JobApplicationService {
         for(JobApplication app: repository.findAll()){
             counts.put(app.status(),counts.getOrDefault(app.status(),0)+1);
         }
-
         return counts;
     }
+
+    public JobApplication findById(int id){
+        return repository.findById(id);
+    }
+
+    public List<JobApplication> findByStatus(String status){
+        List<JobApplication> countByStatus =new ArrayList<>();
+        for(JobApplication application : repository.findAll()){
+            if(application.status().equals(status)){
+                countByStatus.add(application);
+            }
+        }
+        return countByStatus;
+    }
+
+
+
+
 }

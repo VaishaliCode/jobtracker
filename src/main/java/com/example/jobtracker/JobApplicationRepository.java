@@ -23,4 +23,8 @@ public class JobApplicationRepository {
         return new ArrayList<>(store.values());
     }
 
+    public JobApplication findById(int id){
+        return store.get(id);
+    }
+
 }
