@@ -1,5 +1,6 @@
 package com.example.jobtracker;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +28,12 @@ public class JobApplicationController {
     }
 
     @GetMapping("/api/applications/{id}")
-    public JobApplication findById(@PathVariable int id){
-        return service.findById(id);
+    public ResponseEntity<JobApplication> findById(@PathVariable int id){
+        JobApplication application = service.findById(id);
+        if(application==null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(application);
     }
 
     @GetMapping("/api/applications/status/{status}")
@@ -36,7 +41,14 @@ public class JobApplicationController {
         return service.findByStatus(status);
     }
 
-
+    @GetMapping("/api/applications/company/{company}")
+    public ResponseEntity<JobApplication> findByCompany(@PathVariable  String company){
+        JobApplication application = service.findByCompany(company);
+        if(application == null ){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(application);
+    }
 
 }
 

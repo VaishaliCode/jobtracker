@@ -1,7 +1,10 @@
 package com.example.jobtracker;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.parser.Entity;
+import java.security.PublicKey;
 import java.util.*;
 
 @Service
@@ -31,13 +34,22 @@ public class JobApplicationService {
     }
 
     public List<JobApplication> findByStatus(String status){
-        List<JobApplication> countByStatus =new ArrayList<>();
+        List<JobApplication> matches =new ArrayList<>();
         for(JobApplication application : repository.findAll()){
             if(application.status().equals(status)){
-                countByStatus.add(application);
+                matches.add(application);
             }
         }
-        return countByStatus;
+        return matches;
+    }
+
+    public JobApplication findByCompany(String company){
+        for(JobApplication application : repository.findAll()){
+            if(application.company().equals(company)){
+                return application;
+            }
+        }
+        return null;
     }
 
 
