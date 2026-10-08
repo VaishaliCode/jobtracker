@@ -1,10 +1,10 @@
 package com.example.jobtracker;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +49,18 @@ public class JobApplicationController {
         }
         return ResponseEntity.ok(application);
     }
+
+
+    @PostMapping("/api/applications")
+    public ResponseEntity<JobApplication> create(@RequestBody JobApplication application) {
+        JobApplication saved = service.create(application);
+        if(saved == null){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        URI location = URI.create("/api/applications/" + saved.id());
+        return ResponseEntity.created(location).body(saved);
+    }
+
 
 }
 

@@ -27,5 +27,10 @@ public class JobApplicationRepository {
         return store.get(id);
     }
 
+    public JobApplication save(JobApplication application){
+        store.put(application.id(),application);
+        return application;
+    }
+
 
 }

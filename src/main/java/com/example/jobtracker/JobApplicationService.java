@@ -1,10 +1,7 @@
 package com.example.jobtracker;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.parser.Entity;
-import java.security.PublicKey;
+import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
@@ -50,6 +47,13 @@ public class JobApplicationService {
             }
         }
         return null;
+    }
+
+    public JobApplication create(JobApplication application){
+        if(repository.findById(application.id())!=null){
+            return null;
+        }
+        return repository.save(application);
     }
 
 
