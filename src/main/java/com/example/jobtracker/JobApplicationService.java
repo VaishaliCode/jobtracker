@@ -57,6 +57,23 @@ public class JobApplicationService {
     }
 
 
+    public JobApplication update(int id, JobApplication application){
+        if(repository.findById(id)==null){
+            return null;
+        }
+        JobApplication updated = new JobApplication(id,application.company(),application.role(),application.status());
+
+        return repository.save(updated);
+    }
+
+    public JobApplication deleteById(int id){
+        if(repository.findById(id)==null){
+            return null;
+        }
+        return repository.deleteById(id);
+    }
+
+
 
 
 }

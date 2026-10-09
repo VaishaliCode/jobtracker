@@ -32,5 +32,9 @@ public class JobApplicationRepository {
         return application;
     }
 
+    public JobApplication deleteById(int id){
+        return store.remove(id);
+    }
+
 
 }
