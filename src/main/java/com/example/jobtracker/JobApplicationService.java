@@ -18,6 +18,8 @@ public class JobApplicationService {
         return applications;
     }
 
+
+
     public Map<String,Integer> countByStatus(){
         Map<String,Integer> counts = new HashMap<>();
         for(JobApplication app: repository.findAll()){
@@ -49,22 +51,21 @@ public class JobApplicationService {
         return null;
     }
 
-    public JobApplication create(JobApplication application){
-        if(repository.findById(application.id())!=null){
-            return null;
-        }
+    public JobApplication create(JobApplicationRequest request){
+        JobApplication application = new JobApplication(repository.newId(),request.company(),request.role(),request.status());
         return repository.save(application);
     }
 
 
-    public JobApplication update(int id, JobApplication application){
+    public JobApplication update(int id, JobApplicationRequest request){
         if(repository.findById(id)==null){
             return null;
         }
-        JobApplication updated = new JobApplication(id,application.company(),application.role(),application.status());
+        JobApplication updated = new JobApplication(id,request.company(),request.role(),request.status());
 
         return repository.save(updated);
     }
+
 
     public JobApplication deleteById(int id){
         if(repository.findById(id)==null){

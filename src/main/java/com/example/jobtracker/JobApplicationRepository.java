@@ -10,14 +10,25 @@ import java.util.Map;
 @Repository
 public class JobApplicationRepository {
     private final Map<Integer, JobApplication> store = new LinkedHashMap<>();
+    private int nextId = 1;
 
     public JobApplicationRepository(List<SampleData> sources) {
         for (SampleData source : sources) {
             for (JobApplication app : source.load()) {
                 store.put(app.id(), app);
+                if(app.id()>=nextId){
+                    nextId=app.id()+1;
+                }
             }
         }
     }
+
+    public int newId(){
+        int id = nextId;
+        nextId = nextId + 1 ;
+        return id;
+    }
+
 
     public List<JobApplication> findAll() {
         return new ArrayList<>(store.values());
@@ -35,6 +46,5 @@ public class JobApplicationRepository {
     public JobApplication deleteById(int id){
         return store.remove(id);
     }
-
 
 }

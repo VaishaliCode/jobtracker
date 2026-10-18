@@ -30,10 +30,11 @@ For GET:
   - Swiggy can be replaced with any company(String)
 
 For POST:
+- Don't send an id. The server picks a new id and sends it back in the answer.
   - ```bash 
     curl -i -X POST localhost:8081/api/applications \
     -H "Content-Type: application/json" \
-    -d '{"id":10,"company":"Ola","role":"SDE-1","status":"APPLIED"}' 
+    -d '{"company":"Ola","role":"SDE-1","status":"APPLIED"}'
     ```
 
 Update one application (the id in the URL picks which one; send all four fields):
@@ -41,7 +42,7 @@ Update one application (the id in the URL picks which one; send all four fields)
 ```bash
 curl -i -X PUT localhost:8081/api/applications/33 \
   -H "Content-Type: application/json" \
-  -d '{"id":33,"company":"Swiggy","role":"SDE-1","status":"INTERVIEW"}'
+  -d '{"company":"Swiggy","role":"SDE-1","status":"INTERVIEW"}'
 ```
 
 Answer: `200` with the new record, or `404` if no application has this id.
@@ -53,3 +54,5 @@ curl -i -X DELETE localhost:8081/api/applications/33
 ```
 
 Answer: `204` (deleted, no body), or `404` if no application has this id.
+
+

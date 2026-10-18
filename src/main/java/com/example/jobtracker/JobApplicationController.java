@@ -52,8 +52,8 @@ public class JobApplicationController {
 
 
    @PostMapping("/api/applications")
-    public ResponseEntity<JobApplication> create(@RequestBody JobApplication application) {
-        JobApplication saved = service.create(application);
+    public ResponseEntity<JobApplication> create(@RequestBody JobApplicationRequest request) {
+        JobApplication saved = service.create(request);
         if(saved == null){
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
@@ -62,8 +62,8 @@ public class JobApplicationController {
     }
 
     @PutMapping("/api/applications/{id}")
-    public ResponseEntity<JobApplication> update( @PathVariable int id ,@RequestBody JobApplication application){
-        JobApplication update = service.update(id,application);
+    public ResponseEntity<JobApplication> update( @PathVariable int id ,@RequestBody JobApplicationRequest request){
+        JobApplication update = service.update(id,request);
         if(update == null){
             return ResponseEntity.notFound().build();
         }
@@ -71,12 +71,12 @@ public class JobApplicationController {
     }
 
     @DeleteMapping("/api/applications/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable int id) {
+    public ResponseEntity<Void> deleteById(@PathVariable int id){
         JobApplication delete = service.deleteById(id);
-        if(delete == null){
+        if(delete==null){
             return ResponseEntity.notFound().build();
         }
-            return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
 
 

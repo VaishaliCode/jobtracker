@@ -15,7 +15,8 @@ import java.util.List;
                 new JobApplication(2, "Razorpay", "Java Developer", "INTERVIEW"),
                 new JobApplication(33, "Swiggy", "SDE-1", "REJECTED"),
                 new JobApplication(4, "CRED", "Backend Intern", "APPLIED"),
-                new JobApplication(5, "Groww", "Java Developer", "INTERVIEW"));
+                new JobApplication(5, "Groww", "Java Developer", "INTERVIEW")
+        );
     }
 
 }
