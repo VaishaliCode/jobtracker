@@ -1,4 +1,8 @@
 package com.example.jobtracker;
+import jakarta.validation.constraints.NotBlank;
 
-public record JobApplicationRequest(String company, String role, String status) {
+public record JobApplicationRequest(
+        @NotBlank String company,
+        @NotBlank String role,
+        @NotBlank String status) {
 }

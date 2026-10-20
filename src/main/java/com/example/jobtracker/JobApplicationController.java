@@ -1,6 +1,6 @@
 package com.example.jobtracker;
 
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,17 +52,14 @@ public class JobApplicationController {
 
 
    @PostMapping("/api/applications")
-    public ResponseEntity<JobApplication> create(@RequestBody JobApplicationRequest request) {
+    public ResponseEntity<JobApplication> create(@Valid  @RequestBody JobApplicationRequest request) {
         JobApplication saved = service.create(request);
-        if(saved == null){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
         URI location = URI.create("/api/applications/" + saved.id());
         return ResponseEntity.created(location).body(saved);
     }
 
     @PutMapping("/api/applications/{id}")
-    public ResponseEntity<JobApplication> update( @PathVariable int id ,@RequestBody JobApplicationRequest request){
+    public ResponseEntity<JobApplication> update( @PathVariable int id ,@Valid @RequestBody JobApplicationRequest request){
         JobApplication update = service.update(id,request);
         if(update == null){
             return ResponseEntity.notFound().build();
@@ -78,7 +75,5 @@ public class JobApplicationController {
         }
         return ResponseEntity.noContent().build();
     }
-
-
 }
 
