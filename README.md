@@ -31,6 +31,8 @@ For GET:
 
 For POST:
 - Don't send an id. The server picks a new id and sends it back in the answer.
+- Status must be APPLIED, INTERVIEW, OFFER or REJECTED. Any other word gives `400`.
+
   - ```bash 
     curl -i -X POST localhost:8081/api/applications \
     -H "Content-Type: application/json" \
@@ -39,7 +41,7 @@ For POST:
 
 Update one application (the id in the URL picks which one; send all three fields):
 
-- The PUT line no longer says "four fields". One new line: a blank company, role, or status gives 400.
+- A blank company, role, or status gives `400`. Nothing is saved.
 ```bash
 curl -i -X PUT localhost:8081/api/applications/33 \
   -H "Content-Type: application/json" \
