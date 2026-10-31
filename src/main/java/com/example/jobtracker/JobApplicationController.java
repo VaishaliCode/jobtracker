@@ -22,7 +22,7 @@ public class JobApplicationController {
         return service.findAll();
     }
 
-    @GetMapping("api/applications/stats")
+    @GetMapping("/api/applications/stats")
     public Map<String,Integer> stats(){
         return service.countByStatus();
     }

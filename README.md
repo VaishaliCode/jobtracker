@@ -1,6 +1,20 @@
 # Job Application Tracker API
 
 - Deals with the job applications.
+## Start the database
+  
+  Open Docker Desktop first. Then start the database:
+  
+  ```bash
+  docker start jobtracker-db
+  ```
+  
+  First time only (this makes the database):
+  
+  ```bash
+  docker run -d --name jobtracker-db -e POSTGRES_USER=jobtracker -e POSTGRES_PASSWORD=jobtracker -e POSTGRES_DB=jobtracker -p 127.0.0.1:5434:5432 postgres:18
+  ```
+
 - to run the project use: ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 
 curl commands: 
