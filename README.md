@@ -2,7 +2,8 @@
 
 - Deals with the job applications.
 ## Start the database
-  
+- Data is saved in PostgreSQL, so it stays after a restart. The list is empty at first. Add applications with POST.
+
   Open Docker Desktop first. Then start the database:
   
   ```bash

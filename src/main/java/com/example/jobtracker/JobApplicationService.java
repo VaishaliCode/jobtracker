@@ -29,7 +29,7 @@ public class JobApplicationService {
     }
 
     public JobApplication findById(int id){
-        return repository.findById(id);
+        return repository.findById(id).orElse(null);
     }
 
     public List<JobApplication> findByStatus(String status){
@@ -52,26 +52,29 @@ public class JobApplicationService {
     }
 
     public JobApplication create(JobApplicationRequest request){
-        JobApplication application = new JobApplication(repository.newId(),request.company(),request.role(),request.status());
+        JobApplication application = new JobApplication(null,request.company(),request.role(),request.status());
         return repository.save(application);
     }
 
 
     public JobApplication update(int id, JobApplicationRequest request){
-        if(repository.findById(id)==null){
+        if(repository.findById(id).isEmpty()){
             return null;
         }
-        JobApplication updated = new JobApplication(id,request.company(),request.role(),request.status());
+        JobApplication updated = new JobApplication(id, request.company(),request.role(),request.status());
 
         return repository.save(updated);
     }
 
 
     public JobApplication deleteById(int id){
-        if(repository.findById(id)==null){
+        JobApplication application = findById(id);
+        if(application == null){
             return null;
         }
-        return repository.deleteById(id);
+        repository.deleteById(id);
+        return application;
+
     }
 
 
