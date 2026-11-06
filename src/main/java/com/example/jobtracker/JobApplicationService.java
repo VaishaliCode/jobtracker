@@ -14,7 +14,7 @@ public class JobApplicationService {
 
     public List<JobApplication> findAll(){
         List<JobApplication> applications = repository.findAll();
-        applications.sort(Comparator.comparing(JobApplication::id));
+        applications.sort(Comparator.comparing(JobApplication::getId));
         return applications;
     }
 
@@ -23,7 +23,7 @@ public class JobApplicationService {
     public Map<String,Integer> countByStatus(){
         Map<String,Integer> counts = new HashMap<>();
         for(JobApplication app: repository.findAll()){
-            counts.put(app.status(),counts.getOrDefault(app.status(),0)+1);
+            counts.put(app.getStatus(),counts.getOrDefault(app.getStatus(),0)+1);
         }
         return counts;
     }
@@ -35,7 +35,7 @@ public class JobApplicationService {
     public List<JobApplication> findByStatus(String status){
         List<JobApplication> matches =new ArrayList<>();
         for(JobApplication application : repository.findAll()){
-            if(application.status().equals(status)){
+            if(application.getStatus().equals(status)){
                 matches.add(application);
             }
         }
@@ -44,7 +44,7 @@ public class JobApplicationService {
 
     public JobApplication findByCompany(String company){
         for(JobApplication application : repository.findAll()){
-            if(application.company().equals(company)){
+            if(application.getCompany().equals(company)){
                 return application;
             }
         }

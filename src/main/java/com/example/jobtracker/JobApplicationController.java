@@ -54,7 +54,7 @@ public class JobApplicationController {
    @PostMapping("/api/applications")
     public ResponseEntity<JobApplication> create(@Valid  @RequestBody JobApplicationRequest request) {
         JobApplication saved = service.create(request);
-        URI location = URI.create("/api/applications/" + saved.id());
+        URI location = URI.create("/api/applications/" + saved.getId());
         return ResponseEntity.created(location).body(saved);
     }
 

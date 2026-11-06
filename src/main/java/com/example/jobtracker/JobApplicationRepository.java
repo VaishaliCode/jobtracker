@@ -15,9 +15,9 @@ public class JobApplicationRepository {
     public JobApplicationRepository(List<SampleData> sources) {
         for (SampleData source : sources) {
             for (JobApplication app : source.load()) {
-                store.put(app.id(), app);
-                if(app.id()>=nextId){
-                    nextId=app.id()+1;
+                store.put(app.getId(), app);
+                if(app.getId()>=nextId){
+                    nextId=app.getId()+1;
                 }
             }
         }
@@ -39,7 +39,7 @@ public class JobApplicationRepository {
     }
 
     public JobApplication save(JobApplication application){
-        store.put(application.id(),application);
+        store.put(application.getId(),application);
         return application;
     }
 
