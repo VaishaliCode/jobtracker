@@ -42,12 +42,8 @@ public class JobApplicationController {
     }
 
     @GetMapping("/api/applications/company/{company}")
-    public ResponseEntity<JobApplication> findByCompany(@PathVariable  String company){
-        JobApplication application = service.findByCompany(company);
-        if(application == null ){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(application);
+    public List<JobApplication> findByCompany(@PathVariable  String company){
+        return service.findByCompany(company);
     }
 
 

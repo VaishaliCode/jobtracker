@@ -33,22 +33,11 @@ public class JobApplicationService {
     }
 
     public List<JobApplication> findByStatus(String status){
-        List<JobApplication> matches =new ArrayList<>();
-        for(JobApplication application : repository.findAll()){
-            if(application.getStatus().equals(status)){
-                matches.add(application);
-            }
-        }
-        return matches;
+        return repository.findByStatus(status);
     }
 
-    public JobApplication findByCompany(String company){
-        for(JobApplication application : repository.findAll()){
-            if(application.getCompany().equals(company)){
-                return application;
-            }
-        }
-        return null;
+    public List<JobApplication> findByCompany(String company){
+        return repository.findByCompany(company);
     }
 
     public JobApplication create(JobApplicationRequest request){

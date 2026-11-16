@@ -42,6 +42,7 @@ For GET:
   - ```bash 
     curl -i localhost:8081/api/applications/company/Swiggy 
     ```
+  - Gives a list. An empty list `[]` if no application has this company.
   - Swiggy can be replaced with any company(String)
 
 For POST:
@@ -58,7 +59,7 @@ Update one application (the id in the URL picks which one; send all three fields
 
 - A blank company, role, or status gives `400`. Nothing is saved.
 ```bash
-curl -i -X PUT localhost:8081/api/applications/33 \
+curl -i -X PUT localhost:8081/api/applications/1 \
   -H "Content-Type: application/json" \
   -d '{"company":"Swiggy","role":"SDE-1","status":"INTERVIEW"}'
 ```
@@ -68,7 +69,7 @@ Answer: `200` with the new record, or `404` if no application has this id.
 Delete one application by id:
 
 ```bash
-curl -i -X DELETE localhost:8081/api/applications/33
+curl -i -X DELETE localhost:8081/api/applications/1
 ```
 
 Answer: `204` (deleted, no body), or `404` if no application has this id.
