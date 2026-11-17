@@ -1,6 +1,8 @@
 package com.example.jobtracker;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
@@ -12,13 +14,9 @@ public class JobApplicationService {
         this.repository=repository;
     }
 
-    public List<JobApplication> findAll(){
-        List<JobApplication> applications = repository.findAll();
-        applications.sort(Comparator.comparing(JobApplication::getId));
-        return applications;
+    public Page<JobApplication> findAll(Pageable pageable){
+        return repository.findAll(pageable);
     }
-
-
 
     public Map<String,Integer> countByStatus(){
         Map<String,Integer> counts = new HashMap<>();
@@ -36,10 +34,8 @@ public class JobApplicationService {
         return repository.findByUserId(userId);
     }
 
-
-
-    public List<JobApplication> findByStatus(String status){
-        return repository.findByStatus(status);
+    public Page<JobApplication> findByStatus(String status, Pageable pageable){
+        return repository.findByStatus(status,pageable);
     }
 
     public List<JobApplication> findByCompany(String company){

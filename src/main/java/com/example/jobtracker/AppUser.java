@@ -9,12 +9,12 @@ import jakarta.persistence.Id;
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
 
     protected AppUser(){}
 
-    public int getId(){
+    public Integer getId(){
         return id;
     }
 

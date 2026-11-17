@@ -1,6 +1,9 @@
 package com.example.jobtracker;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +21,8 @@ public class JobApplicationController {
     }
 
     @GetMapping("/api/applications")
-    public List<JobApplication> findAll(){
-        return service.findAll();
+    public PagedModel<JobApplication> findAll(@PageableDefault(size = 20, sort = "id") Pageable pageable){
+        return new PagedModel<>(service.findAll(pageable));
     }
 
     @GetMapping("/api/applications/stats")
@@ -37,8 +40,8 @@ public class JobApplicationController {
     }
 
     @GetMapping("/api/applications/status/{status}")
-    public List<JobApplication> findByStatus(@PathVariable String status){
-        return service.findByStatus(status);
+    public PagedModel<JobApplication> findByStatus(@PageableDefault(size = 20, sort = "id") Pageable pageable, @PathVariable String status){
+        return new PagedModel<>(service.findByStatus(status,pageable));
     }
 
     @GetMapping("/api/applications/company/{company}")

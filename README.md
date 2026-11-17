@@ -20,10 +20,14 @@
 
 curl commands: 
 For GET:
-- all job applications:  
-  - ```bash 
-    curl localhost:8081/api/applications
+- all job applications, one page at a time:
+  - ```bash
+    curl -s "localhost:8081/api/applications?page=0&size=2&sort=company"
     ```
+  - page starts at 0. size = rows per page (default 20). sort = a field name, add `,desc` for Z to A (default: id).
+  - Put the URL in double quotes: the terminal cuts it at `&`.
+  - Gives `content` (the rows) and `page` (size, number, totalElements, totalPages).
+
 - job applications by id:
   - ```bash 
     curl localhost:8081/api/applications/2
@@ -31,21 +35,19 @@ For GET:
   - 2 can be replaced with any id(int)
   
 
-- job applications by status: 
-  - ```bash 
-    curl localhost:8081/api/applications/status/INTERVIEW 
+- job applications by status, one page at a time:
+  - ```bash
+    curl -s "localhost:8081/api/applications/status/INTERVIEW?page=0&size=2"
     ```
-  - INTERVIEW can be replaced with any status(String)
+  - INTERVIEW can be replaced with any status(String). Same page, size and sort as above.
   
 
-- job applications by company: 
-- 
+- job applications by company:
   - ```bash 
     curl -i localhost:8081/api/applications/company/Swiggy 
     ```
   - Gives a list. An empty list `[]` if no application has this company.
   - Swiggy can be replaced with any company(String)
-  
 - job applications of one user:
   - ```bash
     curl -i localhost:8081/api/applications/user/1
