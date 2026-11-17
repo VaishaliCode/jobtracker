@@ -39,12 +39,20 @@ For GET:
   
 
 - job applications by company: 
+- 
   - ```bash 
     curl -i localhost:8081/api/applications/company/Swiggy 
     ```
   - Gives a list. An empty list `[]` if no application has this company.
   - Swiggy can be replaced with any company(String)
-
+  
+- job applications of one user:
+  - ```bash
+    curl -i localhost:8081/api/applications/user/1
+    ```
+  - Gives a list. An empty list `[]` if this user has no applications.
+  - 1 can be replaced with any user id(int)
+  - Users are added in psql for now: `INSERT INTO app_user (name) VALUES ('Akash');`
 For POST:
 - Don't send an id. The server picks a new id and sends it back in the answer.
 - Status must be APPLIED, INTERVIEW, OFFER or REJECTED. Any other word gives `400`.

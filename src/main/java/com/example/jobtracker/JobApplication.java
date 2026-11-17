@@ -1,9 +1,7 @@
 package com.example.jobtracker;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 
 @Entity
 public class JobApplication{
@@ -14,6 +12,10 @@ public class JobApplication{
     private String company;
     private String role;
     private String status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private AppUser user;
 
     protected JobApplication(){}
 

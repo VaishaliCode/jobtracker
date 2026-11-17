@@ -46,6 +46,11 @@ public class JobApplicationController {
         return service.findByCompany(company);
     }
 
+    @GetMapping("/api/applications/user/{userId}")
+    public List<JobApplication> findByUserId(@PathVariable int userId){
+        return service.findByUserId(userId);
+    }
+
 
    @PostMapping("/api/applications")
     public ResponseEntity<JobApplication> create(@Valid  @RequestBody JobApplicationRequest request) {

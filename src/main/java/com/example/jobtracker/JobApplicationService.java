@@ -32,6 +32,12 @@ public class JobApplicationService {
         return repository.findById(id).orElse(null);
     }
 
+    public List<JobApplication> findByUserId(int userId){
+        return repository.findByUserId(userId);
+    }
+
+
+
     public List<JobApplication> findByStatus(String status){
         return repository.findByStatus(status);
     }

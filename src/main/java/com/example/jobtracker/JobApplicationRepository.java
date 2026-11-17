@@ -10,4 +10,6 @@ public interface JobApplicationRepository extends JpaRepository<JobApplication,I
 
     List<JobApplication> findByCompany(String company);
 
+    List<JobApplication> findByUserId(int userId);
+
 }
