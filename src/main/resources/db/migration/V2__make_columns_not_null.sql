@@ -1,0 +1,3 @@
+ALTER TABLE job_application ALTER COLUMN company SET NOT NULL;
+ALTER TABLE job_application ALTER COLUMN role SET NOT NULL;
+ALTER TABLE job_application ALTER COLUMN status SET NOT NULL;

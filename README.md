@@ -55,6 +55,7 @@ For GET:
   - Gives a list. An empty list `[]` if this user has no applications.
   - 1 can be replaced with any user id(int)
   - Users are added in psql for now: `INSERT INTO app_user (name) VALUES ('Akash');`
+  - 
 For POST:
 - Don't send an id. The server picks a new id and sends it back in the answer.
 - Status must be APPLIED, INTERVIEW, OFFER or REJECTED. Any other word gives `400`.
@@ -84,4 +85,11 @@ curl -i -X DELETE localhost:8081/api/applications/1
 
 Answer: `204` (deleted, no body), or `404` if no application has this id.
 
+## Database changes (Flyway)
+
+- Every change to the tables is a SQL file in `src/main/resources/db/migration`.
+- Name: `V<number>__<description>.sql` (two underscores). Flyway runs new files at startup, once, in order.
+- Never edit a file that already ran. Add a new one (V3, V4, ...).
+- Hibernate only checks the tables (`ddl-auto=validate`). It does not change them.
+- See what ran, in psql: `SELECT * FROM flyway_schema_history;`
 
