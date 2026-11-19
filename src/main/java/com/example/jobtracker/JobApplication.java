@@ -26,6 +26,16 @@ public class JobApplication{
         this.status = status;
     }
 
+    public void change(String company, String role, String status) {
+        this.company = company;
+        this.role = role;
+        this.status = status;
+    }
+
+    public void changeStatus(String status){
+        this.status=status;
+    }
+
     public Integer getId() {
         return id;
     }

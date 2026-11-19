@@ -55,7 +55,7 @@ For GET:
   - Gives a list. An empty list `[]` if this user has no applications.
   - 1 can be replaced with any user id(int)
   - Users are added in psql for now: `INSERT INTO app_user (name) VALUES ('Akash');`
-  - 
+
 For POST:
 - Don't send an id. The server picks a new id and sends it back in the answer.
 - Status must be APPLIED, INTERVIEW, OFFER or REJECTED. Any other word gives `400`.
@@ -76,6 +76,17 @@ curl -i -X PUT localhost:8081/api/applications/1 \
 ```
 
 Answer: `200` with the new record, or `404` if no application has this id.
+
+Change only the status (the id in the URL picks which one):
+
+- Send only `status`. Company, role and owner stay the same.
+- Status must be APPLIED, INTERVIEW, OFFER or REJECTED. Any other word gives `400`.
+- `404` if no application has this id.
+```bash
+curl -i -X PATCH localhost:8081/api/applications/1/status \
+  -H "Content-Type: application/json" \
+  -d '{"status":"OFFER"}'
+```
 
 Delete one application by id:
 

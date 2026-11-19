@@ -71,6 +71,15 @@ public class JobApplicationController {
         return ResponseEntity.ok(update);
     }
 
+    @PatchMapping("/api/applications/{id}/status")
+    public ResponseEntity<JobApplication> updateStatus(@PathVariable int id, @Valid @RequestBody StatusRequest statusRequest){
+        JobApplication updateStatus = service.updateStatus(id, statusRequest);
+        if(updateStatus == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updateStatus);
+    }
+
     @DeleteMapping("/api/applications/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable int id){
         JobApplication delete = service.deleteById(id);

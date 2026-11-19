@@ -1,6 +1,7 @@
 package com.example.jobtracker;
 
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -48,13 +49,24 @@ public class JobApplicationService {
     }
 
 
+    @Transactional
     public JobApplication update(int id, JobApplicationRequest request){
-        if(repository.findById(id).isEmpty()){
+        JobApplication application = repository.findById(id).orElse(null);
+        if(application == null){
             return null;
         }
-        JobApplication updated = new JobApplication(id, request.company(),request.role(),request.status());
+        application.change(request.company(),request.role(),request.status());
+        return application;
+    }
 
-        return repository.save(updated);
+    @Transactional
+    public JobApplication updateStatus(int id, StatusRequest statusRequest){
+        JobApplication application = repository.findById(id).orElse(null);
+        if (application == null){
+            return null;
+        }
+        application.changeStatus(statusRequest.status());
+        return application;
     }
 
 

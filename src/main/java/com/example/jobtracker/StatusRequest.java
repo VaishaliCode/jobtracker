@@ -1,0 +1,8 @@
+package com.example.jobtracker;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+public record StatusRequest(
+        @NotBlank @Pattern(regexp = "APPLIED|OFFER|INTERVIEW|REJECTED", message = "must be APPLIED, INTERVIEW, OFFER or REJECTED") String status) {
+}
