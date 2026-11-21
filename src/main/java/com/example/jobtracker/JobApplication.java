@@ -36,6 +36,13 @@ public class JobApplication{
         this.status=status;
     }
 
+    public String ownerName(){
+        if (user == null){
+            return null;
+        }
+        return user.getName();
+    }
+
     public Integer getId() {
         return id;
     }

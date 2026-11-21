@@ -56,6 +56,14 @@ For GET:
   - 1 can be replaced with any user id(int)
   - Users are added in psql for now: `INSERT INTO app_user (name) VALUES ('Akash');`
 
+Applications with the owner's name (one query, no N+1):
+
+- `owner` is `null` if the application has no owner.
+```bash
+curl -i localhost:8081/api/applications/with-owner
+curl -i localhost:8081/api/applications/with-owner/status/APPLIED
+```
+
 For POST:
 - Don't send an id. The server picks a new id and sends it back in the answer.
 - Status must be APPLIED, INTERVIEW, OFFER or REJECTED. Any other word gives `400`.

@@ -54,6 +54,15 @@ public class JobApplicationController {
         return service.findByUserId(userId);
     }
 
+    @GetMapping(("/api/applications/with-owner"))
+    public List<ApplicationView> findAllWithOwner(){
+        return service.findAllWithOwner();
+    }
+
+    @GetMapping("/api/applications/with-owner/status/{status}")
+    public List<ApplicationView> findAllOwnerWithStatus(@PathVariable String status){
+        return service.findByStatusWithOwner(status);
+    }
 
    @PostMapping("/api/applications")
     public ResponseEntity<JobApplication> create(@Valid  @RequestBody JobApplicationRequest request) {

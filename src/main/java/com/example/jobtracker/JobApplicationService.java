@@ -69,6 +69,36 @@ public class JobApplicationService {
         return application;
     }
 
+    @Transactional
+    public List<ApplicationView> findAllWithOwner(){
+        List<ApplicationView> views = new ArrayList<>();
+        for(JobApplication application : repository.findAllWithOwner()){
+            views.add(new ApplicationView(
+                    application.getId(),
+                    application.getCompany(),
+                    application.getRole(),
+                    application.getStatus(),
+                    application.ownerName()));
+        }
+        return views;
+    }
+
+    @Transactional
+    public List<ApplicationView> findByStatusWithOwner(String status){
+        List<ApplicationView> views = new ArrayList<>();
+        for(JobApplication application : repository.findAllOwnerWithStatus(status)){
+            views.add(new ApplicationView(
+                    application.getId(),
+                    application.getCompany(),
+                    application.getRole(),
+                    application.getStatus(),
+                    application.ownerName()
+            ));
+        }
+        return views;
+
+    }
+
 
     public JobApplication deleteById(int id){
         JobApplication application = findById(id);
