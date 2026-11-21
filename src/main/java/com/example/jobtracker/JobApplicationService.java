@@ -78,7 +78,7 @@ public class JobApplicationService {
                     application.getCompany(),
                     application.getRole(),
                     application.getStatus(),
-                    application.ownerName()));
+                    application.OwnerName()));
         }
         return views;
     }
@@ -92,7 +92,7 @@ public class JobApplicationService {
                     application.getCompany(),
                     application.getRole(),
                     application.getStatus(),
-                    application.ownerName()
+                    application.OwnerName()
             ));
         }
         return views;

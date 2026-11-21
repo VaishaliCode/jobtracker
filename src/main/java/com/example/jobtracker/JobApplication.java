@@ -36,7 +36,7 @@ public class JobApplication{
         this.status=status;
     }
 
-    public String ownerName(){
+    public String OwnerName(){
         if (user == null){
             return null;
         }

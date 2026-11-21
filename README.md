@@ -19,6 +19,16 @@
 - to run the project use: ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 
 curl commands: 
+
+Login (Spring Security, HTTP Basic):
+
+- Every GET is open. No login needed.
+- POST, PUT, PATCH and DELETE need a login. Add `-u akash:dev-pass-123` (dev profile only).
+- No login, or a wrong password: `401`.
+```bash
+curl -i -u akash:dev-pass-123 -X DELETE localhost:8081/api/applications/1
+```
+
 For GET:
 - all job applications, one page at a time:
   - ```bash
